@@ -93,13 +93,3 @@ bot.onText(/\/start/, (msg) => {
     }
   );
 });
-
-//deploy
-var deploy = require('gulp-deploy-git');
-
-gulp.task('deploy', function() {
-  return gulp.src('dist/**/*', { read: false })
-    .pipe(deploy({
-      repository: 'https://github.com/moooooncrescent/mncrscntbot.git'
-    }));
-});
