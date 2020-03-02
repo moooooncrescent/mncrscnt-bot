@@ -56,7 +56,7 @@ const getWeather = (chatId, city) => {
     console.log("error", error);
     bot.sendMessage(
       chatId,
-      `Ooops...I couldn't be able to get weather for <b>${city}</b>`, {
+      `К сожалению, город <b>${city}</b> я не могу найти в базе.`, {
         parse_mode: "HTML"
       }
     );
@@ -71,7 +71,7 @@ bot.onText(/\/weather/, (msg, match) => {
   if (city === undefined) {
     bot.sendMessage(
       chatId,
-      `Please provide city name`
+      `Пожалуйста, напиши название города`
     );
     return;
   }
@@ -85,13 +85,21 @@ bot.onText(/\/start/, (msg) => {
   const chatId = msg.chat.id;
   bot.sendMessage(
     chatId,
-    `Welcome at <b>MyTestWeatherInfoBot</b>, thank you for using my service
-    
-Available commands:
+    `Привет, ознакомься с доступными командами:
 
-/weather <b>city</b> - shows weather for selected <b>city</b>
+/weather <b>название города на английском языке</b> - покажет погоду для выбранного города.
   `, {
       parse_mode: "HTML"
     }
   );
+});
+
+//deploy
+var deploy = require('gulp-deploy-git');
+
+gulp.task('deploy', function() {
+  return gulp.src('dist/**/*', { read: false })
+    .pipe(deploy({
+      repository: 'https://github.com/moooooncrescent/mncrscntbot.git'
+    }));
 });
